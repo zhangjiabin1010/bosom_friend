@@ -3,15 +3,18 @@ package test
 import (
 	"bosom_friend/models"
 	"fmt"
-	"reflect"
 	"testing"
 )
 
 func TestGorm(t *testing.T) {
 
-	tx := models.GetActivityList("test", "test2")
-	fmt.Println(reflect.TypeOf(tx))
-	count := tx
+	count, activitys := models.GetActivityTest("1", "1")
+	//count := tx.(map[string] interface{})["count"]
+	fmt.Println("xxxxxxxxxxx")
+	fmt.Println(count)
+	fmt.Println(activitys)
+	fmt.Println("xxxxxxxxxxx")
+
 	//db.Model(&models.Activity{}).Where("number = 2").Count(&count).Scan(&activity)
 	//fmt.Println(activity)
 	//fmt.Println(count)

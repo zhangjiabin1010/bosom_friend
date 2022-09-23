@@ -22,23 +22,21 @@ func ActivityQuery(c *gin.Context) {
 	size, _ := strconv.Atoi(c.Query("size"))
 	hobbyid := c.Query("hobbyid")
 	locationid := c.Query("locationid")
+	if page == 0 {
+		page = 1
+	}
 	offset := (page - 1) * size
-	fmt.Println(offset)
-	activitysData := models.GetActivityList(hobbyid, locationid)
-	fmt.Println(activitysData)
+	fmt.Println(offset, size)
+	count, activitysData := models.GetActivityList(hobbyid, locationid)
+
 	c.JSON(http.StatusOK, gin.H{
 		"code":    200,
 		"message": "获取成功",
-		"data":    "",
+		"data": map[string]interface{}{
+			"data":  activitysData,
+			"count": count,
+		},
 	})
-	//c.JSON(http.StatusOK,gin.H{
-	//	"code":200,
-	//	"message":"获取成功",
-	//	"data": map[string] interface{} {
-	//		"data":data,
-	//		"count":count,
-	//	},
-	//})
 }
 
 func ActivityAdd(c *gin.Context) {
