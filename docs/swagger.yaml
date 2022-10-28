@@ -1,0 +1,31 @@
+info:
+  contact: {}
+paths:
+  /activityquery:
+    get:
+      parameters:
+      - description: 当前页数:默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 每页数据量
+        in: query
+        name: size
+        type: integer
+      - description: 爱好id
+        in: query
+        name: hobbyid
+        type: integer
+      - description: 地区id
+        in: query
+        name: locationid
+        type: integer
+      responses:
+        "200":
+          description: '{"code":200, "message":"获取成功", "data":"",}'
+          schema:
+            type: string
+      summary: 活动查询
+      tags:
+      - 公共方法
+swagger: "2.0"

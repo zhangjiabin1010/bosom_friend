@@ -1,0 +1,50 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/activityquery": {
+            "get": {
+                "tags": [
+                    "公共方法"
+                ],
+                "summary": "活动查询",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "当前页数:默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页数据量",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "爱好id",
+                        "name": "hobbyid",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "地区id",
+                        "name": "locationid",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200, \"message\":\"获取成功\", \"data\":\"\",}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

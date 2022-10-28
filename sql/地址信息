@@ -1,0 +1,8 @@
+-- 地址查询-省份查询
+SELECT code,name FROM `location_basic_bak` where city = '0'
+-- 市查询
+SELECT code,name FROM `location_basic_bak` where city != '0' and area='0'
+-- 区查询
+SELECT code,name FROM `location_basic_bak` where city != '0' and area !='0' and town='0'
+-- 街道
+SELECT code,name FROM `location_basic_bak` where city != '0' and area !='0' and town !='0'

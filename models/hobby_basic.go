@@ -1,8 +1,12 @@
 package models
 
-import "time"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 type Hobby struct {
+	gorm.Model `json:"-"`
 	HobbyId     int         `gorm:"column:hobbyid"`
 	Name        string      `gorm:"column:name"`
 	Type        string      `gorm:"column:type"`

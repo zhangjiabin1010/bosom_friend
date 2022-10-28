@@ -5,11 +5,12 @@ import (
 	"time"
 )
 
+
 type Activity struct {
 	Id           int         `gorm:"column:id"`
 	ActivityId   string      `gorm:"column:activityid"`
 	Title        string      `gorm:"column:title"`
-	Condition    string      `gorm:"column:condition"`
+	Conditions    string      `gorm:"column:conditions"`
 	Number       string      `gorm:"column:number"`
 	Gender       string      `gorm:"column:gender"`
 	Age          string      `gorm:"column:age"`
@@ -17,8 +18,10 @@ type Activity struct {
 	Status       string      `gorm:"column:status"`
 	Createtime   time.Time   `gorm:"column:createtime"`
 	Updatetime   time.Time   `gorm:"column:updatetime"`
-	Locations    []*Location `gorm:"many2many:activity_location"`
+	//Locations    []*Location `gorm:"many2many:activity_location"`
 	Hobbys       []*Hobby    `gorm:"many2many:activity_hobby"`
+
+
 }
 
 func (table *Activity) TableName() string {
@@ -29,7 +32,11 @@ func GetActivityList(hobbyid string, locationid string) (int64, []Activity) {
 	tx := GetDB()
 	var count int64
 	var activitys []Activity
-	tx.Model(&Activity{}).Where("number = 2").Count(&count).Scan(&activitys)
+	tx.Model(&Activity{}).
+		Joins("inner join activity_hobby ah on ah.activityid = activity_basic.activityid").
+		Where("activity_basic.hobbyid = ?","1").
+		Select("activityid,title,condition").
+		Count(&count).Find(&activitys)
 	//data := make(map[string]interface{})
 	//data["count"] = count
 	//data["data"] = activitys
@@ -39,17 +46,29 @@ func GetActivityList(hobbyid string, locationid string) (int64, []Activity) {
 
 func GetActivityTest(hobbyid string, locationid string) (int64, []Activity) {
 	tx := GetDB()
+
 	var count int64
 	var activitys []Activity
+	var hobbys []Hobby
 	//tx.Model(&Activity{}).Preload("models.Hobby").Find(&activitys)
-	err := tx.Model(&Activity{}).Association("Hobbys").Find(&activitys)
-	if err != nil {
-		fmt.Println("OK")
-	}
+	//err := tx.Model(&Activity{}).
+	//	Joins("inner join activity_hobby ah on ah.hobbyid = hobby.hobbyid").
+	//	Select(activity.activityid,)
+	data := tx.Model(&Activity{}).
+		Joins("inner join activity_hobby ah on ah.activityid = activity_basic.activityid and ah.hobbyid = ?","1").
+		Select("activity_basic.activityid,activity_basic.title,activity_basic.conditions").
+		Count(&count).Find(&activitys)
+
 
 	//data := make(map[string]interface{})
 	//data["count"] = count
 	//data["data"] = activitys
+	fmt.Println("xxxxxxxxxxxxxxxxxxxxxxxx")
+	fmt.Println(data)
+	fmt.Println(activitys)
+	fmt.Println(hobbys)
+	fmt.Println("xxxxxxxxxxxxxxxxxxxxxxxx")
+
 	return count, activitys
 
 }

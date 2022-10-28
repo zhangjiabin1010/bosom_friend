@@ -10,10 +10,10 @@ func TestGorm(t *testing.T) {
 
 	count, activitys := models.GetActivityTest("1", "1")
 	//count := tx.(map[string] interface{})["count"]
-	fmt.Println("xxxxxxxxxxx")
+	fmt.Println("x")
 	fmt.Println(count)
 	fmt.Println(activitys)
-	fmt.Println("xxxxxxxxxxx")
+	fmt.Println("x")
 
 	//db.Model(&models.Activity{}).Where("number = 2").Count(&count).Scan(&activity)
 	//fmt.Println(activity)

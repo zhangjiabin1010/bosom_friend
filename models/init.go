@@ -13,8 +13,10 @@ var _db *gorm.DB
 //包初始化函数，golang特性，每个包初始化的时候会自动执行init函数，这里用来初始化gorm。
 func init() {
 	username := "root"       //账号
-	password := "beiwei1010" //密码
-	host := "49.232.124.98"  //数据库地址，可以是Ip或者域名
+	//password := "beiwei1010" //密码
+	//host := "49.232.124.98"  //数据库地址，可以是Ip或者域名
+	password := "Qqbeiwei1010_."
+	host := "152.67.220.34"
 	port := 3306             //数据库端口
 	Dbname := "bosomfriend"  //数据库名
 	timeout := "10s"         //连接超时，10秒
