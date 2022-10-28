@@ -12,6 +12,8 @@ func Router() *gin.Engine {
 	r := gin.Default()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
+	r.GET("/addressquery", service.ActivityQuery)
+
 	r.GET("/activityquery", service.ActivityQuery)
 	r.POST("/activityadd", service.ActivityAdd)
 	r.POST("/activityupdate", service.ActivityUpdate)
